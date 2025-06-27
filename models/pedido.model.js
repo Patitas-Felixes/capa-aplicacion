@@ -58,5 +58,5 @@ const pedidoSchema = new mongoose.Schema(
     }
 );
 
-const Pedido = mongoose.model("Pedido", pedidoSchema);
+const Pedido = mongoose.model("pedidos", pedidoSchema);
 module.exports = Pedido;

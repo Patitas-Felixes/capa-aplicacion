@@ -8,6 +8,6 @@ const marcaSchema = new mongoose.Schema({
     timestamps: true, versionKey: false
 })
 
-const marcaModel = mongoose.model("Marca", marcaSchema);
+const marcaModel = mongoose.model("marcas", marcaSchema);
 
 module.exports = marcaModel;

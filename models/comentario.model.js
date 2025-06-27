@@ -41,6 +41,6 @@ const comentarioSchema = new mongoose.Schema(
     }
 );
 
-const comentarioModel = mongoose.model("Comentario", comentarioSchema);
+const comentarioModel = mongoose.model("comentarios", comentarioSchema);
 
 module.exports = comentarioModel;
