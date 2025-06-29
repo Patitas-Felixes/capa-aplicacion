@@ -9,6 +9,7 @@ require("./database");
 app.use(express.json());   //Para leer los formatos json del body
 
 app.use(require("./routes/index.routes.js"));
+app.use(require("./routes/auth.routes.js"));
 
 app.use(require("./userModel")) //Usa los modelos de BD
 
