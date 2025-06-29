@@ -1,9 +1,15 @@
-const { expressjwt: jwt } = require("express-jwt");
-const { jwtSecret } = require("../config.js");
+const estaAutenticado = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.status(401).json({ message: "Acceso no autorizado. Inicia sesión." });
+};
 
-const authMiddleware = jwt({
-    secret: jwtSecret,
-    algorithms: ["HS256"]
-});
+const esAdmin = (req, res, next) => {
+    if (req.user && req.user.es_admin) {
+        return next();
+    }
+    res.status(403).json({ message: "Acceso denegado: solo para administradores." });
+};
 
-module.exports = authMiddleware;
+module.exports = { estaAutenticado, esAdmin };
