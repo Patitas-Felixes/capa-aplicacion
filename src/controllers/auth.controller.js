@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/usuario.model.js");
-const { jwtSecret } = require("../src/config.js");
+const { jwtSecret } = require("../config.js");
 
 exports.register = async (req, res) => {
     const { nombre, apellido, email, password, direccion } = req.body;

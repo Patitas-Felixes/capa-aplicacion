@@ -1,5 +1,5 @@
 const { expressjwt: jwt } = require("express-jwt");
-const { jwtSecret } = require("../src/config.js");
+const { jwtSecret } = require("../config.js");
 
 const authMiddleware = jwt({
     secret: jwtSecret,
