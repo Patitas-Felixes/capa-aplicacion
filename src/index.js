@@ -1,7 +1,7 @@
 // Importamos express
 const express = require("express");
 const session = require("express-session");
-const passport = require("./config.js");
+const passport = require("./configs/passport.config.js");
 
 // Generando la app web
 const app = express();
