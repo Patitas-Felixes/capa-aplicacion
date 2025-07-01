@@ -19,10 +19,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const indexRouters = require("./routes/index.routes.js");
-const authRouter = require("./routes/auth.routes.js");
 
 app.use('/', indexRouters);
-app.use("/auth", authRouter);
 
 // Para cualquier otra ruta (not found)
 app.use(function(req, res, next) {
