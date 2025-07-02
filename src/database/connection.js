@@ -19,6 +19,24 @@ const conectarDB = async () => {
         console.error("Error al conectar a la DB", error);
         process.exit(1);
     }
-}
+};
+
+//const connectWithRetry = () => {
+//  console.log('Intentando conectar a MongoDB...');
+//  // ENV PROD
+//  mongoose.connect("mongodb://database/mydatabase")
+//    .then(db => {
+//      console.log("🟢 DB conectada correctamente a", db.connection.host);
+//      console.log(`🟢 Nombre de la base de datos: ${db.connection.name}`);
+//    })
+//    .catch(err => {
+//      console.error('❌ Error de conexión a MongoDB:', err);
+//      console.log('Reintentando en 5 segundos...');
+//      setTimeout(connectWithRetry, 5000);
+//    });
+//};
+//
+//connectWithRetry();
+
 
 module.exports = conectarDB;
