@@ -11,6 +11,8 @@ mongoose.connect("mongodb://database/mydatabase")
 // .then(db=>console.log("DB is connected to", db.connection.host))
 // .catch(err=>console.error(err));
 
+// Function to connect to MongoDB
+//ENV DEV
 const conectarDB = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URI);
@@ -21,6 +23,19 @@ const conectarDB = async () => {
     }
 };
 
+//ENV PROD
+//const conectarDB = async () => {
+//    try {
+//        await mongoose.connect(process.env.PROD_MONGODB_URI);
+//        console.log("Conectado a la DB");
+//    } catch (error) {
+//        console.error("Error al conectar a la DB", error);
+//        process.exit(1);
+//    }
+//};
+
+// Function to connect to MongoDB with retry logic
+// Uncomment the following lines if you want to use retry logic
 //const connectWithRetry = () => {
 //  console.log('Intentando conectar a MongoDB...');
 //  // ENV PROD
