@@ -9,13 +9,13 @@ const productoRouter = require("./producto.routes.js");
 const comentarioRouter = require("./comentario.routes.js");
 const pedidoRouter = require("./pedido.routes.js");
 
-router.use("/auth", authRouter);
-router.use('/', usuarioRouter);
-router.use('/', categoriaRouter);
-router.use('/', marcaRouter);
-router.use('/', productoRouter);
-router.use('/', comentarioRouter);
-router.use('/', pedidoRouter);
+router.use("/api/auth", authRouter);
+router.use("/api/", usuarioRouter);
+router.use("/api/", categoriaRouter);
+router.use("/api/", marcaRouter);
+router.use("/api/", productoRouter);
+router.use("/api/", comentarioRouter);
+router.use("/api/", pedidoRouter);
 
 router.get("/", (req, res) => {
     res.send("Bienvenidos a Patitas Felices!!!")
