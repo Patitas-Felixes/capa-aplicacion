@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   webapp:
     container_name: contenedor_app

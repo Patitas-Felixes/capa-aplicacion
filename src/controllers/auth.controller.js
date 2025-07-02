@@ -2,12 +2,18 @@ const usuarioModel = require("../models/usuario.model.js");
 
 exports.register = async (req, res) => {
     const { nombre, apellido, email, password, direccion } = req.body;
-    const usuarioEncontrado = await usuarioModel.findOne({ email });
-    if (usuarioEncontrado) {
-        return res.status(409).json({ message: "El email ya está en uso" });
+    try {
+        const usuarioEncontrado = await usuarioModel.findOne({ email });
+        if (usuarioEncontrado) {
+            return res.status(409).json({ message: "El email ya está en uso" });
+        }
+        const nuevoUsuario = await usuarioModel.create({ nombre, apellido, email, password, direccion });
+        res.status(201).json({ message: "Usuario registrado", usuario: nuevoUsuario });
+    } catch (error) {
+        console.error("Error", error);
+        res.status(500).json({ message: "Problema en el server" });
+
     }
-    const nuevoUsuario = await usuarioModel.create({ nombre, apellido, email, password, direccion });
-    res.status(201).json({ message: "Usuario registrado", usuario: nuevoUsuario });
 };
 
 exports.login = (req, res) => {
