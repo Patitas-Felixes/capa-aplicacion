@@ -24,6 +24,7 @@ services:
 networks:
   app-network:
     driver: bridge
+    name: patitasfelices_network    
 
 volumes:
   mongodb_data:
