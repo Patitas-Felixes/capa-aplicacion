@@ -34,7 +34,19 @@ app.use('/', indexRouters);
 
 // Para cualquier otra ruta (not found)
 app.use(function(req, res, next) {
+    console.log(`404 Not Found: ${req.method} ${req.originalUrl}`);
     next(createError(404));
+});
+
+// Error handler
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.send({
+        error: {
+            status: err.status || 500,
+            message: err.message
+        }
+    });
 });
 
 module.exports = app;
