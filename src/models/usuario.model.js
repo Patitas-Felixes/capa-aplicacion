@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const usuarioSchema = new mongoose.Schema(
     {
@@ -40,6 +41,25 @@ const usuarioSchema = new mongoose.Schema(
         versionKey: false
     }
 );
+
+usuarioSchema.pre("save", async function (next) {
+    try {
+        if (!this.isModified("password")) {
+            return next();
+        }
+
+        const salt = await bcrypt.genSalt(10);
+
+        this.password = await bcrypt.hash(this.password, salt);
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
+
+usuarioSchema.methods.compararPassword = async function (passwordIngresada) {
+    return await bcrypt.compare(passwordIngresada, this.password);
+}
 
 const usuarioModel = mongoose.model("usuarios", usuarioSchema);
 
