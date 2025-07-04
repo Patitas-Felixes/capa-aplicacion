@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 
 const marcaModel = require("../models/marca.model");
@@ -21,18 +22,25 @@ const seedDB = async () => {
     }
 
     console.log("Seeding DB");
-    console.log("Limpiando colecciones")
+    console.log("Eliminando colecciones")
     try {
-        await marcaModel.deleteMany({});
-        await categoriaModel.deleteMany({});
-        await productoModel.deleteMany({});
-        await pedidoModel.deleteMany({});
-        await comentarioModel.deleteMany({});
-        await usuarioModel.deleteMany({});
+        // await marcaModel.deleteMany({});
+        // await categoriaModel.deleteMany({});
+        // await productoModel.deleteMany({});
+        // await pedidoModel.deleteMany({});
+        // await comentarioModel.deleteMany({});
+        // await usuarioModel.deleteMany({});
 
-        console.log("Colecciones limpiadas");
+        await marcaModel.collection.drop();
+        await categoriaModel.collection.drop();
+        await productoModel.collection.drop();
+        await pedidoModel.collection.drop();
+        await comentarioModel.collection.drop();
+        await usuarioModel.collection.drop();
+
+        console.log("Colecciones eliminadas");
     } catch (error) {
-        console.error("Error al limpiar las colecciones: ", error);
+        console.error("Error al eliminar las colecciones: ", error);
         process.exit(1);
     }
 
@@ -65,6 +73,7 @@ const seedDB = async () => {
         console.log("Categorías insertadas");
 
         console.log("Insertando productos");
+
         const productos = await productoModel.insertMany([{
             nombre: "Croquetas Purina Dog Chow 8 kg",
             descripcion: "Alimento seco para perro adulto",
@@ -251,98 +260,98 @@ const seedDB = async () => {
                 apellido: "Ramírez",
                 email: "carlos.ramirez@email.com",
                 direccion: "Av. Siempre Viva 123",
-                password: "passwordAdmin1",
+                password: await bcrypt.hash("passwordAdmin1", 10),
                 es_admin: true
             }, {
                 nombre: "María",
                 apellido: "López",
                 email: "maria.lopez@email.com",
                 direccion: "Calle de la Amistad 456",
-                password: "passwordAdmin2",
+                password: await bcrypt.hash("passwordAdmin2", 10),
                 es_admin: true
             }, {
                 nombre: "Antonio",
                 apellido: "Zapata",
                 email: "antonio.zapata@email.com",
                 direccion: "Blvd. Perros 789",
-                password: "passwordAdmin3",
+                password: await bcrypt.hash("passwordAdmin3", 10),
                 es_admin: true
             }, {
                 nombre: "Sofía",
                 apellido: "Gómez",
                 email: "sofia.gomez@email.com",
                 direccion: "Calle Luna 100",
-                password: "passwordAdmin4",
+                password: await bcrypt.hash("passwordAdmin4", 10),
                 es_admin: true
             }, {
                 nombre: "Ricardo",
                 apellido: "Silva",
                 email: "ricardo.silva@email.com",
                 direccion: "Av. Sol 200",
-                password: "passwordAdmin5",
+                password: await bcrypt.hash("passwordAdmin5", 10),
                 es_admin: true
             }, {
                 nombre: "Elena",
                 apellido: "Martínez",
                 email: "elena.martinez@email.com",
                 direccion: "Cra. del Río 350",
-                password: "contraUltraSegura1",
+                password: await bcrypt.hash("contraUltraSegura1", 10),
                 es_admin: false
             }, {
                 nombre: "Jesús",
                 apellido: "Ortega",
                 email: "jesus.ortega@email.com",
                 direccion: "Paseo del Mar 50",
-                password: "contraUltraSegura2",
+                password: await bcrypt.hash("contraUltraSegura2", 10),
                 es_admin: false
             }, {
                 nombre: "Andrea",
                 apellido: "Chávez",
                 email: "andrea.chavez@email.com",
                 direccion: "Bosques 450",
-                password: "contraUltraSegura3",
+                password: await bcrypt.hash("contraUltraSegura3", 10),
                 es_admin: false
             }, {
                 nombre: "Claudia",
                 apellido: "Hernández",
                 email: "claudia.hdz@email.com",
                 direccion: "Flores 555",
-                password: "contraUltraSegura4",
+                password: await bcrypt.hash("contraUltraSegura4", 10),
                 es_admin: false
             }, {
                 nombre: "Luis",
                 apellido: "Vega",
                 email: "luis.vega@email.com",
                 direccion: "Cañada Azul 24",
-                password: "contraUltraSegura5",
+                password: await bcrypt.hash("contraUltraSegura5", 10),
                 es_admin: false
             }, {
                 nombre: "Marisol",
                 apellido: "Santos",
                 email: "marisol.santos@email.com",
                 direccion: "Fracc. Jardines 300",
-                password: "contraUltraSegura6",
+                password: await bcrypt.hash("contraUltraSegura6", 10),
                 es_admin: false
             }, {
                 nombre: "Fabio",
                 apellido: "Ruiz",
                 email: "fabio.ruiz@email.com",
                 direccion: "Cerrada Sauce 150",
-                password: "contraUltraSegura7",
+                password: await bcrypt.hash("contraUltraSegura7", 10),
                 es_admin: false
             }, {
                 nombre: "Ariadna",
                 apellido: "Paredes",
                 email: "ariadna.paredes@email.com",
                 direccion: "Fronteras 452",
-                password: "contraUltraSegura8",
+                password: await bcrypt.hash("contraUltraSegura8", 10),
                 es_admin: false
             }, {
                 nombre: "Patricio",
                 apellido: "Navarrete",
                 email: "patricio.nava@email.com",
                 direccion: "Arboledas 98",
-                password: "contraUltraSegura9",
+                password: await bcrypt.hash("contraUltraSegura9", 10),
                 es_admin: false
             }
         ]);
@@ -477,8 +486,21 @@ const seedDB = async () => {
             }
         ]);
         console.log("Pedidos insertados");
+
+        console.log("Datos insertados correctamente");
     } catch (error) {
         console.error("Error al intentar insertar: ", error);
         process.exit(1);
+    } finally {
+        await mongoose.connection.close();
+        console.log("Conexión a la DB cerrada");
     }
 }
+
+seedDB().then(() => {
+    console.log("Seeding finalizado correctamente");
+    process.exit(0);
+}).catch((error) => {
+    console.error("Error al intentar seed: ", error);
+    process.exit(1);
+});
