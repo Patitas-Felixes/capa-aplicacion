@@ -25,12 +25,12 @@ const productoSchema = new mongoose.Schema(
         },
         id_categoria: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Categoria",
+            ref: "categorias",
             required: true
         },
         id_marca: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Marca",
+            ref: "marcas",
             required: true
         },
         imagen_url: {
