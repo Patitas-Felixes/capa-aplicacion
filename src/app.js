@@ -20,8 +20,8 @@ app.use(express.json());   //Para leer los formatos json del body
 app.use(
     session({
         secret: "clave_secreta",
-        resave: false,
-        saveUninitialized: false,
+        resave: true,
+        saveUninitialized: true,
     })
 );
 
