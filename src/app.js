@@ -22,11 +22,12 @@ app.use(
         secret: "clave_secreta",
         resave: true,
         saveUninitialized: true,
+        // cookie: { secure: true }
     })
 );
 
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session(false));
 
 const indexRouters = require("./routes/index.routes.js");
 

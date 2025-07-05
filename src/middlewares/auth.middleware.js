@@ -6,6 +6,7 @@ const estaAutenticado = (req, res, next) => {
 };
 
 const esAdmin = (req, res, next) => {
+    console.log(req.user);
     if (req.user && req.user.es_admin) {
         return next();
     }

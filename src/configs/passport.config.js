@@ -7,8 +7,12 @@ passport.use(new LocalStrategy(
     async (email, password, done) => {
         try {
             const usuario = await usuarioModel.findOne({ email });
-            if (!usuario || usuario.password !== password) {
-                return done(null, false, { message: "Usuario o contraseña incorrectos" });
+            if (!usuario) {
+                return done(null, false, { message: "Usuario no encontrado" });
+            }
+            const passwordCorrecto = await usuario.compararPassword(password);
+            if (!passwordCorrecto) {
+                return done(null, false, { message: "Contraseña incorrecta" });
             }
             return done(null, usuario);
         } catch (err) {
