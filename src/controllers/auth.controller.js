@@ -40,7 +40,8 @@ exports.login = async (req, res) => {
 
         res.status(200).json({
             message: "Inicio de sesión exitoso",
-            usuario: usuario.email
+            usuario: usuario.email,
+            es_admin: usuario.es_admin
         });
     } catch (error) {
         console.error("Error en el login: ", error);
