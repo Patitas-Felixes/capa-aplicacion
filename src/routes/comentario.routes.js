@@ -35,4 +35,11 @@ router.delete("/comentarios/:id", async (req, res) =>{
     res.send(respuesta)
 });
 
+// Obtener todos los comentarios de un producto
+router.get("/comentarios/producto/:producto_id", async (req, res) => {
+    const producto_id = req.params.producto_id;
+    const comentarios = await comentarioModel.find({ producto_id });
+    res.send(comentarios);
+});
+
 module.exports = router;

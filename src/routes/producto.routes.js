@@ -17,6 +17,13 @@ router.get("/productos", async (req, res) =>{
     res.send(respuesta)
 });
 
+// Obtener productos por category id
+router.get("/productos/categoria/:id_categoria", async (req, res) => {
+    const id_categoria = req.params.id_categoria;
+    const productos = await productoModel.find({ id_categoria });
+    res.send(productos);
+});
+
 router.get("/productos/:id", async (req, res) =>{
     const id = req.params.id;
     const respuesta = await productoModel.findById(id);
