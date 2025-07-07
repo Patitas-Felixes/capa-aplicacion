@@ -9,6 +9,7 @@ router.post("/register", register);
 router.post("/login", passport.authenticate("local"), (req, res) => {
     res.status(200).json({
         message: "Sesión iniciada",
+        _id: req.user._id,
         usuario: req.user.email,
         es_admin: req.user.es_admin
     });
