@@ -27,7 +27,7 @@ networks:
   app-network:
     driver: bridge
     name: patitasfelices-network   
-    external: true 
+    external: true
 
 volumes:
   mongodb_data:

@@ -14,7 +14,10 @@ dotenv.config();
 const seedDB = async () => {
     console.log("Conectando a la DB");
     try {
-        await mongoose.connect(process.env.MONGODB_URI);
+        const mongoURI = process.env.NODE_ENV === 'production'
+            ? process.env.PROD_MONGODB_URI
+            : process.env.MONGODB_URI;
+        await mongoose.connect(mongoURI);
         console.log("Conectado a la DB");
     } catch (error) {
         console.error("Error al conectar a la DB: ", error);

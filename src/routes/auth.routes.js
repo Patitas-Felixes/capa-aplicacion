@@ -17,7 +17,7 @@ router.post("/login", passport.authenticate("local"), (req, res) => {
 router.post("/logout", logout);
 
 // Para probar que funciona el permiso
-router.get("/admin", estaAutenticado, esAdmin,(req, res) => {
+router.get("/admin", estaAutenticado, esAdmin, (req, res) => {
     console.log(req.usuario);
     res.json({ message: "Autenticado y admin" });
 });
